@@ -167,7 +167,7 @@ def main():
             # ===== EXECUÇÃO DO TESTE =====
             try:
                 print("\n1 - Branch and Bound")
-                print("2 - Backtracking Puro")
+                print("2 - Backtracking")
                 alg = input("Algoritmo: ").strip()
 
                 if alg not in ("1", "2"):
@@ -193,7 +193,7 @@ def main():
                 inicio = time.perf_counter()
 
                 if alg == "2":
-                    nome_alg = "Backtracking Puro"
+                    nome_alg = "Backtracking"
                     backtracking(0, set(), [], 0.0, matriz)
                 else:
                     nome_alg = "Branch and Bound"
