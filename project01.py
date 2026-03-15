@@ -35,12 +35,12 @@ def backtracking(cliente_atual, visitados, rota_atual, distancia_atual, matriz_d
             visitados.remove(prox_cliente)
 
 
-#  ALGORITMO: BRANCH AND BOUND (Ramificar e Podar)
+#  ALGORITMO: BRANCH AND BOUND 
 def branch_and_bound(cliente_atual, visitados, rota_atual, distancia_atual, matriz_dist):
     global melhor_distancia, melhor_rota, estados_explorados
     estados_explorados += 1
     
-    # Poda: Se a rota parcial já for pior que a melhor encontrada, para de explorar
+    # Se a rota parcial já for pior que a melhor encontrada, para de explorar
     if distancia_atual >= melhor_distancia:
         return
         
@@ -77,7 +77,6 @@ def main():
     
     print("\nPerfeito! Agora, a entrada de dados (o 'n' (número de clientes), o depósito e os clientes):")
     
-    # Leitura dos dados linha por linha
     n = int(input().strip())
     
     deposito_coords = input().strip().split()
@@ -126,7 +125,7 @@ def main():
     # ---------------------------------------------------------
     
     print("\n" + "="*30)
-    print("AVALIAÇÕES RECOMENDADAS:")
+    print("AVALIAÇÕES:")
     print("="*30)
     print(f"Algoritmo utilizado.......: {nome_algo}")
     print(f"Tempo de execução.........: {tempo_execucao:.6f} segundos")
