@@ -1,1 +1,1 @@
-# Tecnicas-de-An-lise-de-Algoritmos---Planejamento-de-Rotas-de-Entrega
+# Tecnicas-de-Analise-de-Algoritmos---Planejamento-de-Rotas-de-Entrega
