@@ -5,12 +5,11 @@ def calcular_distancia(p1, p2):
     """Calcula a distância Euclidiana entre dois pontos."""
     return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
 
-# --- Variáveis Globais de Controle ---
 melhor_distancia = float('inf')
 melhor_rota = []
 estados_explorados = 0
 
-# 1. ALGORITMO: BACKTRACKING PURO
+#  ALGORITMO: BACKTRACKING 
 def backtracking(cliente_atual, visitados, rota_atual, distancia_atual, matriz_dist):
     global melhor_distancia, melhor_rota, estados_explorados
     estados_explorados += 1
@@ -36,7 +35,7 @@ def backtracking(cliente_atual, visitados, rota_atual, distancia_atual, matriz_d
             visitados.remove(prox_cliente)
 
 
-# 2. ALGORITMO: BRANCH AND BOUND (Ramificar e Podar)
+#  ALGORITMO: BRANCH AND BOUND (Ramificar e Podar)
 def branch_and_bound(cliente_atual, visitados, rota_atual, distancia_atual, matriz_dist):
     global melhor_distancia, melhor_rota, estados_explorados
     estados_explorados += 1
@@ -70,16 +69,15 @@ def main():
     global melhor_distancia, melhor_rota, estados_explorados
     
     print("=== Planejamento de Rotas de Entrega ===")
-    print("1 - Branch and Bound (Recomendado, poda caminhos ruins)")
-    print("2 - Backtracking Puro (Força bruta, explora tudo)")
+    print("1 - Branch and Bound ")
+    print("2 - Backtracking Puro ")
     
-    # Input 1: Escolha do algoritmo
+    # Escolha do algoritmo
     escolha = input("Escolha o algoritmo (digite 1 ou 2): ").strip()
     
-    print("\nPerfeito! Agora, cole a entrada de dados (o 'n', o depósito e os clientes):")
-    print("(Pode copiar e colar todas as linhas do exemplo de uma vez e dar Enter)\n")
+    print("\nPerfeito! Agora, a entrada de dados (o 'n' (número de clientes), o depósito e os clientes):")
     
-    # Input 2: Leitura dos dados linha por linha
+    # Leitura dos dados linha por linha
     n = int(input().strip())
     
     deposito_coords = input().strip().split()
@@ -111,8 +109,9 @@ def main():
     tempo_execucao = fim_tempo - inicio_tempo
     
     # ---------------------------------------------------------
-    # SAÍDA EXATAMENTE NO PADRÃO SOLICITADO
+    # SAÍDA
     # ---------------------------------------------------------
+    
     print("\n" + "="*30)
     print("SAÍDA DO PROBLEMA:")
     print("="*30)
@@ -123,8 +122,9 @@ def main():
     print(" ".join(sequencia))
     
     # ---------------------------------------------------------
-    # AVALIAÇÕES RECOMENDADAS PELO PROFESSOR
+    # AVALIAÇÕES 
     # ---------------------------------------------------------
+    
     print("\n" + "="*30)
     print("AVALIAÇÕES RECOMENDADAS:")
     print("="*30)
