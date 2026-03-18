@@ -44,7 +44,7 @@ reuso.
 
 ## Como executar
 
-1. Crie e ative um ambiente virtual (opcional, recomendado):
+1. Crie e ative um ambiente virtual (opcional):
 
 ```powershell
 python -m venv venv
@@ -63,7 +63,7 @@ pip install matplotlib
 python main.py
 ```
 
-4. Menu disponível (executado por `project01.py`):
+4. Menu disponível (executado por `main.py`):
 - `1 - Executar teste`: solicita algoritmo, número de clientes e coordenadas;
 	executa o algoritmo escolhido e registra o relatório.
 - `2 - Ver relatório`: imprime relatórios salvos em memória.
@@ -71,33 +71,7 @@ python main.py
 - `4 - Gerar gráficos comparativos`: executa benchmarks e mostra gráficos.
 - `0 - Sair`.
 
-## Exemplos de uso programático
 
-Se preferir usar os algoritmos a partir de outro script, siga este padrão:
-
-```python
-from Algoritmos.Backtracking import Backtracking
-from Algoritmos.BranchAndBound import BranchAndBound
-
-# matriz é uma lista de listas de distâncias com depósito no índice 0
-solver = Backtracking(matriz)
-dist, rota, estados = solver.resolver()
-```
-
-Para gerar gráficos programaticamente, chame:
-
-```python
-from Controller.graficoController import executar_testes_e_plotar
-executar_testes_e_plotar()
-```
-
-Para adicionar/visualizar relatórios:
-
-```python
-from Controller import relatorioController
-relatorioController.adicionar_relatorio({...})
-relatorioController.imprimir_relatorios()
-```
 
 ## Observações
 
@@ -106,5 +80,3 @@ relatorioController.imprimir_relatorios()
 - Estruture a matriz de distâncias corretamente (depósito no índice `0`).
 - Testes e gráficos usam coordenadas geradas aleatoriamente por padrão.
 
-Se quiser, posso adicionar um `requirements.txt`, exemplos de matrizes de teste
-ou scripts automatizados para rodar benchmarks em lote.
