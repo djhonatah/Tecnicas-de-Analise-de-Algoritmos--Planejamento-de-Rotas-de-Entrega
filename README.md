@@ -33,7 +33,11 @@ reuso.
 		`ler_opcao_menu()`, `ler_nome_arquivo()`.
 	- `escritor_saida.py` — Funções para imprimir no console: `imprimir_menu()`,
 		`imprimir_resultado(distancia, rota)` e `imprimir_mensagem(msg)`.
-
+- `Relatórios`
+	- Contem os relatorios com as sequencias de execução do algoritmo selecionado.
+	- `Teste1` - É um relatório com algumas execuções efetuadas.
+- `Documento/Relatorio`
+	- Contem o .docs com o Relatorio comparativo entre os algoritmos.
 ## Formato esperado
 
 - Matriz de distâncias: uma lista de listas `matriz[i][j]` com distância entre o
