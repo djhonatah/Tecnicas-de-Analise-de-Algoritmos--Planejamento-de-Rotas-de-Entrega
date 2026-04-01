@@ -1,9 +1,11 @@
 def ler_dados_teste():
     print("\n1 - Branch and Bound")
     print("2 - Backtracking")
+    print("3 - Programação Dinâmica")
+    print("4 - Estratégia Gulosa")
     alg = input("Algoritmo: ").strip()
 
-    if alg not in ("1", "2"):
+    if alg not in ("1", "2", "3", "4"):
         raise ValueError("Algoritmo inválido")
 
     n = int(input("Número de clientes: ").strip())

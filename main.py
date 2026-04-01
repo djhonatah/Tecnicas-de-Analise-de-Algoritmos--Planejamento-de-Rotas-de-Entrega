@@ -2,6 +2,8 @@ import time
 import math
 from Algoritmos.Backtracking import Backtracking
 from Algoritmos.BranchAndBound import BranchAndBound
+from Algoritmos.ProgramacaoDinamica import ProgramacaoDinamica
+from Algoritmos.EstrategiaGulosa import EstrategiaGulosa
 from Controller import relatorioController, graficoController
 from IO import leitor_entrada, escritor_saida
 
@@ -20,12 +22,18 @@ def executar_teste():
 
         inicio = time.perf_counter()
 
-        if alg == "2":
-            nome_alg = "Backtracking"
-            solver = Backtracking(matriz)
-        else:
+        if alg == "1":
             nome_alg = "Branch and Bound"
             solver = BranchAndBound(matriz)
+        elif alg == "2":
+            nome_alg = "Backtracking"
+            solver = Backtracking(matriz)
+        elif alg == "3":
+            nome_alg = "Programação Dinâmica"
+            solver = ProgramacaoDinamica(matriz)
+        else:
+            nome_alg = "Estratégia Gulosa"
+            solver = EstrategiaGulosa(matriz)
             
         melhor_distancia, melhor_rota, estados_explorados = solver.resolver()
         
