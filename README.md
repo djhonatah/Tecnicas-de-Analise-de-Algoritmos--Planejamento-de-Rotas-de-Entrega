@@ -1,50 +1,43 @@
 # Técnicas de Análise de Algoritmos — Planejamento de Rotas de Entrega
 
-Este repositório contém uma implementação didática de algoritmos de otimização
-para o problema do Caixeiro Viajante (TSP) aplicado ao planejamento de rotas
-de entrega. O código foi organizado em módulos para facilitar manutenção e
-reuso.
+Projeto didático que implementa várias estratégias para o problema do
+Caixeiro Viajante (TSP) aplicado ao planejamento de rotas de entrega. O
+código está modularizado para facilitar experimentos, geração de relatórios
+e criação de gráficos comparativos.
 
 ## Estrutura do projeto
 
-- `main.py` — Programa principal (menu) que orquestra o sistema.
-- `README.md` — Este arquivo com descrição e instruções.
+- `main.py` — Programa principal com menu interativo que orquestra execução
+	de testes, relatórios e gráficos.
+- `README.md` — Documentação (este arquivo).
 
-- `Algoritmos/`
-	- `Backtracking.py` — Classe `Backtracking` que implementa a solução por
-		backtracking. Uso: instanciar com a matriz de distâncias e chamar
-		`resolver()`.
-	- `BranchAndBound.py` — Classe `BranchAndBound` que implementa branch-and-bound
-		com poda por bound simples. Uso: instanciar com a matriz de distâncias e
-		chamar `resolver()`.
+- `Algoritmos/` — Implementações das estratégias para TSP:
+	- `Backtracking.py` — classe `Backtracking`: busca exaustiva (DFS) com
+		poda baseada na melhor solução atual. Uso: instanciar com a matriz de
+		distâncias e chamar `resolver()` que retorna `(melhor_distancia, melhor_rota, estados_explorados)`.
+	- `BranchAndBound.py` — classe `BranchAndBound`: implementação similar ao
+		backtracking com poda simples (ver observações sobre heurísticas abaixo).
+	- `ProgramacaoDinamica.py` — classe `ProgramacaoDinamica`: implementação do
+		algoritmo de programação dinâmica (bitmask) para TSP. Retorna a melhor
+		distância, a rota reconstruída e o número de estados explorados.
+	- `EstrategiaGulosa.py` — classe `EstrategiaGulosa`: heurística gulosa que
+		constrói uma rota escolhendo o cliente mais próximo não visitado.
 
-- `Controller/`
-	- `relatorioController.py` — Funções para gerenciar relatórios em memória,
-		imprimir no console e salvar em arquivo texto. Funções principais:
-		`adicionar_relatorio(dict)`, `imprimir_relatorios()`,
-		`salvar_relatorios_txt(nome_arquivo)`.
-	- `graficoController.py` — Função `executar_testes_e_plotar()` que gera
-		benchmarks comparando tempo e estados explorados dos algoritmos e plota
-		gráficos (usa `matplotlib`).
+- `Controller/` — Controle de relatórios e geração de gráficos:
+	- `relatorioController.py` — mantém relatórios em memória, imprime e salva
+		em arquivo texto (`adicionar_relatorio`, `imprimir_relatorios`, `salvar_relatorios_txt`).
+	- `graficoController.py` — executa benchmarks (vários `n`) e plota tempo x n
+		e estados explorados x n (usa `matplotlib`).
 
-- `IO/`
-	- `leitor_entrada.py` — Funções de leitura interativa do usuário:
-		`ler_dados_teste()` (lê opção de algoritmo, número de clientes e coordenadas),
-		`ler_opcao_menu()`, `ler_nome_arquivo()`.
-	- `escritor_saida.py` — Funções para imprimir no console: `imprimir_menu()`,
-		`imprimir_resultado(distancia, rota)` e `imprimir_mensagem(msg)`.
-- `Relatórios`
-	- Contem os relatorios com as sequencias de execução do algoritmo selecionado.
-	- `Teste1` - É um relatório com algumas execuções efetuadas.
-- `Documento/Relatorio`
-	- Contem o .docs com o Relatorio comparativo entre os algoritmos.
-## Formato esperado
+- `IO/` — Entrada e saída de usuário:
+	- `leitor_entrada.py` — funções para ler opção do menu, parâmetros de teste
+		(algoritmo, número de clientes e coordenadas) e nome de arquivo.
+	- `escritor_saida.py` — funções para imprimir o menu, resultados e mensagens.
 
-- Matriz de distâncias: uma lista de listas `matriz[i][j]` com distância entre o
-	depósito (índice 0) e clientes (1..n). O construtor das classes espera essa
-	matriz pronta.
-- Retorno de `resolver()`: tupla `(melhor_distancia, melhor_rota, estados_explorados)`.
-	- `melhor_rota` é uma lista de índices (inclui o depósito `0` quando aplicável).
+- `Relatorios/` — Pasta onde relatórios podem ser salvos (texto).
+- `Documento/` — Documentação e análises comparativas.
+
+
 
 ## Como executar
 
@@ -55,13 +48,13 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-2. Instale dependências (somente `matplotlib` é requerida para plots):
+2. Instalar dependência para gráficos (se quiser gerar plots):
 
 ```powershell
 pip install matplotlib
 ```
 
-3. Rode a aplicação principal:
+3. Rodar o programa:
 
 ```powershell
 python main.py
@@ -71,7 +64,7 @@ python main.py
 - `1 - Executar teste`: solicita algoritmo, número de clientes e coordenadas;
 	executa o algoritmo escolhido e registra o relatório.
 - `2 - Ver relatório`: imprime relatórios salvos em memória.
-- `3 - Salvar relatório em arquivo`: salva relatórios no caminho informado.
+- `3 - Salvar relatório em arquivo`: salva relatórios no formato .txt na pasta `Relatorios`.
 - `4 - Gerar gráficos comparativos`: executa benchmarks e mostra gráficos.
 - `0 - Sair`.
 
