@@ -1,5 +1,6 @@
-relatorios = []
 import os
+
+relatorios = []
 def adicionar_relatorio(relatorio):
     relatorios.append(relatorio)
 
@@ -29,6 +30,7 @@ def salvar_relatorios_txt(nome):
         print("\nNenhum teste para salvar.")
         return
     pasta = "Relatorios"
+    os.makedirs(pasta, exist_ok=True)
     caminho_completo = os.path.join(pasta, nome)
     with open(caminho_completo, "w", encoding="utf-8") as f:
         f.write("RELATÓRIO DE TESTES - TSP\n")

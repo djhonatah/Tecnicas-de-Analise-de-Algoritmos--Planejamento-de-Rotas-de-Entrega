@@ -1,5 +1,3 @@
-import math
-
 class Backtracking:
     def __init__(self, matriz_dist):
         self.matriz_dist = matriz_dist
@@ -12,20 +10,25 @@ class Backtracking:
         self._backtracking(0, {0}, [0], 0.0)
         return self.melhor_distancia, self.melhor_rota, self.estados_explorados
 
-    def _backtracking(self, cliente_atual, visitados, rota_atual, distancia_atual):
+    def _backtracking(self, atual, visitados, rota_atual, dist_atual):
         self.estados_explorados += 1
 
+        # Poda por custo: se a distância acumulada já supera a melhor
+        # solução conhecida, não há sentido em continuar este ramo.
+        # Esta verificação antecipada evita explorar o caso base e todos
+        # os filhos de um nó claramente inviável.
+        if dist_atual >= self.melhor_distancia:
+            return
+
+        # Caso base: todos os nós foram visitados → fecha o ciclo
         if len(visitados) == self.n + 1:
-            d = distancia_atual + self.matriz_dist[cliente_atual][0]
+            d = dist_atual + self.matriz_dist[atual][0]
             if d < self.melhor_distancia:
                 self.melhor_distancia = d
                 self.melhor_rota = rota_atual.copy()
             return
 
-        if distancia_atual >= self.melhor_distancia:
-            return
-
-        for prox in range(self.n + 1):
+        for prox in range(1, self.n + 1):
             if prox not in visitados:
                 visitados.add(prox)
                 rota_atual.append(prox)
@@ -33,7 +36,7 @@ class Backtracking:
                     prox,
                     visitados,
                     rota_atual,
-                    distancia_atual + self.matriz_dist[cliente_atual][prox]
+                    dist_atual + self.matriz_dist[atual][prox]
                 )
                 rota_atual.pop()
                 visitados.remove(prox)

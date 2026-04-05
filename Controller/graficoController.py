@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import time
 import random
+import os
 from Algoritmos.Backtracking import Backtracking
 from Algoritmos.BranchAndBound import BranchAndBound
 from Algoritmos.ProgramacaoDinamica import ProgramacaoDinamica
@@ -77,4 +78,7 @@ def executar_testes_e_plotar():
     ax2.grid(True)
 
     plt.tight_layout()
+    os.makedirs("Relatorios", exist_ok=True)
+    plt.savefig("Relatorios/grafico_comparativo.png", dpi=150, bbox_inches='tight')
+    print("\nGráfico salvo em 'Relatorios/grafico_comparativo.png'")
     plt.show()

@@ -17,7 +17,9 @@ class ProgramacaoDinamica:
         
         while True:
             prox_nodo = self.parent.get((atual, mask))
-            if prox_nodo is None:
+            # Proteção: None indica ausência de registro (rota completa)
+            # -1 indica que nenhum vizinho foi encontrado (grafo inválido)
+            if prox_nodo is None or prox_nodo == -1:
                 break
             self.melhor_rota.append(prox_nodo)
             mask = mask | (1 << prox_nodo)

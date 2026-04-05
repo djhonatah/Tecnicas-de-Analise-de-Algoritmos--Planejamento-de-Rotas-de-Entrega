@@ -1,5 +1,3 @@
-import math
-
 class BranchAndBound:
     def __init__(self, matriz_dist):
         self.matriz_dist = matriz_dist
@@ -12,20 +10,56 @@ class BranchAndBound:
         self._branch_and_bound(0, {0}, [0], 0.0)
         return self.melhor_distancia, self.melhor_rota, self.estados_explorados
 
-    def _branch_and_bound(self, cliente_atual, visitados, rota_atual, distancia_atual):
+    def _lower_bound(self, atual, visitados, dist_atual):
+        """
+        Limitante inferior (lower bound) para o custo de completar a rota.
+
+        Para cada nó relevante (nó atual + nós não visitados), calcula a
+        menor aresta de saída possível em direção aos destinos restantes
+        (não visitados + depósito de retorno). A soma dessas mínimas
+        arestas é um limitante inferior válido: qualquer rota que complete
+        o ciclo precisa atravessar pelo menos uma aresta a partir de cada
+        um desses nós.
+        """
+        nao_visitados = [i for i in range(self.n + 1) if i not in visitados]
+
+        # Todos os nós já visitados → só falta retornar ao depósito
+        if not nao_visitados:
+            return dist_atual + self.matriz_dist[atual][0]
+
+        # Destinos candidatos: não visitados + depósito (retorno final)
+        restantes = nao_visitados + [0]
+
+        lb = 0
+
+        # Custo mínimo de sair do nó atual em direção a algum restante
+        lb += min(self.matriz_dist[atual][v] for v in restantes)
+
+        # Para cada nó não visitado, custo mínimo de saída para outro restante
+        for v in nao_visitados:
+            outros = [u for u in restantes if u != v]
+            if outros:
+                lb += min(self.matriz_dist[v][u] for u in outros)
+
+        return dist_atual + lb
+
+    def _branch_and_bound(self, atual, visitados, rota_atual, dist_atual):
         self.estados_explorados += 1
 
-        if distancia_atual >= self.melhor_distancia:
+        # Poda por limitante inferior: se o mínimo possível para completar
+        # já supera a melhor solução conhecida, abandona este ramo inteiro.
+        if self._lower_bound(atual, visitados, dist_atual) >= self.melhor_distancia:
             return
 
+        # Caso base: todos os nós foram visitados → fecha o ciclo
         if len(visitados) == self.n + 1:
-            d = distancia_atual + self.matriz_dist[cliente_atual][0]
+            d = dist_atual + self.matriz_dist[atual][0]
             if d < self.melhor_distancia:
                 self.melhor_distancia = d
                 self.melhor_rota = rota_atual.copy()
             return
 
-        for prox in range(self.n + 1):
+        for prox in range(1, self.n + 1):
             if prox not in visitados:
                 visitados.add(prox)
                 rota_atual.append(prox)
@@ -33,7 +67,7 @@ class BranchAndBound:
                     prox,
                     visitados,
                     rota_atual,
-                    distancia_atual + self.matriz_dist[cliente_atual][prox]
+                    dist_atual + self.matriz_dist[atual][prox]
                 )
                 rota_atual.pop()
                 visitados.remove(prox)
