@@ -153,7 +153,7 @@ Reconstrói a rota ótima via tabela de predecessores `parent`.
 ### `EstrategiaGulosa.py` — Classe `EstrategiaGulosa`
 Heurística do **vizinho mais próximo** (Nearest-Neighbor): a partir do depósito,
 escolhe sempre o cliente não visitado mais próximo do nó atual. Extremamente
-rápida ($O(N^2)$) mas não garante a solução ótima — pode produzir rotas
+rápida $O(N^2)$ mas não garante a solução ótima — pode produzir rotas
 sub-ótimas quando os saltos finais são forçados a longas distâncias.
 
 ---
