@@ -209,23 +209,7 @@ dezenas de GB, tornando-se inviável em hardware convencional.
 
 ---
 
-### 4. Qualidade da Solução (Ótima vs Aproximada)
-
-| Algoritmo | Tipo | Garantia |
-| :--- | :---: | :--- |
-| **Backtracking** | Exato | ✅ Sempre retorna a distância mínima |
-| **Branch and Bound** | Exato | ✅ Sempre retorna a distância mínima |
-| **Programação Dinâmica** | Exato | ✅ Sempre retorna a distância mínima |
-| **Estratégia Gulosa** | Aproximado | ⚠️ Pode retornar rota sub-ótima |
-
-A Estratégia Gulosa toma decisões locais sem horizonte global: ao escolher sempre
-o vizinho mais próximo, pode se forçar a realizar saltos longos nos passos finais,
-gerando rotas sub-ótimas. Em contrapartida, é a única estratégia viável para
-instâncias grandes onde os algoritmos exatos são proibitivos.
-
----
-
-### 5. Escalabilidade
+### 4. Escalabilidade
 
 | Algoritmo | Limite prático | Razão |
 | :--- | :---: | :--- |
@@ -236,7 +220,7 @@ instâncias grandes onde os algoritmos exatos são proibitivos.
 
 ---
 
-### 6. Métricas de Estados Explorados
+### 5. Métricas de Estados Explorados
 
 Medidas coletadas nos benchmarks automáticos (opção `4`):
 
@@ -256,7 +240,7 @@ Medidas coletadas nos benchmarks automáticos (opção `4`):
 
 ---
 
-### 7. Podas no Espaço de Busca e Justificativas
+### 6. Podas no Espaço de Busca e Justificativas
 
 #### Branch and Bound — Limitante Inferior (`_lower_bound`)
 
